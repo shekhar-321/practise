@@ -5,9 +5,10 @@
 //Adjancecy list represenation of graph//
 using namespace std;
 class Graph{
-public:
+private:
 int vertex;
 vector <int> edge;
+public:
 Graph(){
 vertex=0;
 }
@@ -15,17 +16,24 @@ void addNode(int vertex,int ed){
 this->vertex=vertex;
 edge.push_back(ed);
 }
-};
-
-void printGraph(vector<Graph>&v){
-for(unsigned iterator=0;iterator<v.size();iterator++){
-cout<<"vertex ->"<<v[iterator].vertex;
-for(unsigned it=0;it<v[iterator].edge.size();it++)
-cout<<"edge - >"<<v[iterator].edge[it];
+void printGraph(){
+cout<<"vertex ->"<<this->vertex;
+for (unsigned int i=0;i<this->edge.size();i++){
+cout<<"edge - >"<<this->edge[i];
+}
 cout<<endl;
 }
+};
 
-}
+//void printGraph(vector<Graph>&v){
+//for(unsigned iterator=0;iterator<v.size();iterator++){
+//cout<<"vertex ->"<<v[iterator].vertex;
+//for(unsigned it=0;it<v[iterator].edge.size();it++)
+//cout<<"edge - >"<<v[iterator].edge[it];
+//cout<<endl;
+//}
+
+//}
 
 int main(){
 vector<Graph>graph(5,Graph());
@@ -40,7 +48,9 @@ graph[3].addNode(3,2);
 graph[3].addNode(3,4);
 graph[4].addNode(4,1);
 graph[4].addNode(4,3);
-printGraph(graph);
+//printGraph(graph);
+for (unsigned int i=0;i<5;i++)
+graph[i].printGraph();
 return 0;
 }
 
