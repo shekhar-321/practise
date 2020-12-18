@@ -4,50 +4,71 @@
 //this is a refrence from geeksforgeeks
 //TODO add custom deleter in sharedpointer class
 //counter class
-class counter{
-    unsigned int m_counter;
+class Counter
+{
 public:
-    counter():m_counter(0){};
-    counter(int x):m_counter(x){};
-    counter(const counter &obj)=delete;
-    counter& operator=(const counter &obj)=delete;
-    ~counter(){
-        m_counter = 0;
-    }
-    unsigned int get(){
-        return m_counter;
-    }
-    void reset(){
-        m_counter = 0;
-    }
-    void operator++(){
-        m_counter++;
-    }
-    void operator++(int){
-        m_counter++;
-    }
-    void operator--(int){
-        m_counter--;
-    }
-    void operator--(){
-        m_counter--;
-    }
-    friend std::ostream& operator<<(std::ostream& os,const counter& co)
-    {
-            os << "Counter Value : " << co.m_counter<<std::endl;
-            return os;
-    }
-};
+    // Constructor
+    Counter()
+        : m_counter(0){};
 
+    //Counter(const Counter&) = delete;
+    //Counter& operator=(const Counter&) = delete;
+
+    // Destructor
+    ~Counter() {}
+
+    void reset()
+    {
+      m_counter = 0;
+    }
+
+    unsigned int get()
+    {
+      return m_counter;
+    }
+
+    // Overload post/pre increment
+    void operator++()
+    {
+      m_counter++;
+    }
+
+    void operator++(int)
+    {
+      m_counter++;
+    }
+
+    // Overload post/pre decrement
+    void operator--()
+    {
+      m_counter--;
+    }
+    void operator--(int)
+    {
+      m_counter--;
+    }
+
+    // Overloading << operator
+    friend std::ostream& operator<<(std::ostream& os,
+                               const Counter& counter)
+    {
+        os << "Counter Value : " << counter.m_counter
+           << std::endl;
+        return os;
+    }
+
+private:
+    unsigned int m_counter;
+};
 template <typename T>
 class sharedpointer
 {
-    T *data = nullptr;
-    counter *m_counter;
+    T *data;
+    Counter *m_counter;
 public:
     explicit sharedpointer(T *x=nullptr){
         data = x;
-        m_counter = new counter();
+        m_counter = new Counter();
         if (x){
             (*m_counter)++;
         }
